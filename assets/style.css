@@ -1,0 +1,78 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    background-color: rgb(218, 227, 231);
+}
+
+#paragraph {
+    border-bottom: solid;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    display: flex;
+    padding: 0;
+    margin: 10vh;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    max-width: 80%;
+    background-color: rgb(67, 163, 184);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 8px 2px;
+    opacity: .8;
+}
+
+#question-card {
+    background-color: rgb(160, 234, 242);
+    opacity: .8;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 15vh;
+    margin: 35px 30px;
+    background-color: rgb(160, 234, 242);
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 4px 12px;
+    background-color: black;
+    color: white;
+    outline: none;
+}
+
+.btn:hover {
+    border-color: whitesmoke;
+}
+
+.start-btn, .next-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 5px 20px;
+     background-color: rgba(244, 49, 1, 0.933);
+    box-shadow: 3px 3px 3px gray;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.hide {
+    display: none;
+  }
+
+/* All code inspired by Web Dev Simplified youtube video "Build a quiz app" -dated Jun 15th 2019 /*
