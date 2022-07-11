@@ -18,8 +18,10 @@
             <br> Good luck!
         </p>
     </div>
+    <div class = "answer-resultc hide" id = "correct">Correct!</div>
+    <div class = "answer-resultw hide" id = "wrong">WRONG!</div>
     <div id="container">
-        <section class="card">
+        <section id="card">
         <div id="question-card" class="hide">
           <div id="question">Question</div>
           <div id="answer-buttons" class="btn-grid">
@@ -28,6 +30,14 @@
             <button class="btn">3</button>
             <button class="btn">4</button>
           </div>
+        </div>
+        <div class = "hide" id = "submissionForm">
+            <form>
+                <h2> Your score is:</h2>
+                <label for = "initials">Enter your initials: </label>
+                <input type = "text" id = "initials" name = "initials" ><br>
+                <button class = "btn" id = "sub-btn">Submit</button>
+            </form>
         </div>
         </section>
         <div class="controls">

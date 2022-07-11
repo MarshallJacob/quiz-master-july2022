@@ -2,7 +2,10 @@ const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const questionCardEl = document.getElementById("question-card");
 const timeRemaining = document.getElementById("timeRemaining");
-// var correctAnswers = 
+const rightAnswer = document.getElementById("correct")
+const wrong = document.getElementById("wrong")
+const submissionFormEl = document.getElementById("submissionForm")
+// var quizScore =  
 var timer = 60;
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById('answer-buttons');
@@ -34,6 +37,8 @@ showQuestion(shuffledQuestions[currentQuestionIndex])
 // Enables buttons to replace eachother without overlapping.
 function resetState () {
     nextButton.classList.add("hide")
+    correct.classList.add("hide");
+    wrong.classList.add("hide");
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild
         (answerButtonsEl.firstChild)
@@ -87,6 +92,7 @@ const question = [
         ]
     }
 ];
+
 // Allows for each question to be displayed and interacts with answers to verifiy weather or not the answers is correct.
 function showQuestion (question) {
 questionEl.innerText = question.question;
@@ -96,7 +102,7 @@ question.answers.forEach(answers => {
     button.classList.add("btn");
     if (answers.correct) {
         button.dataset.correct = answers.correct;
-    } else wrongAnswer();
+    }
     button.addEventListener("click", selectAnswer);
     answerButtonsEl.appendChild(button);
     });
@@ -112,14 +118,15 @@ function selectAnswer (e) {
     });
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove("hide")
-    }; //else arrive to the final page
+    } else finalQuizScore ();
 };
 
 function setStatusClass(element, correct) {
     clearStatusClass(element);
     if (correct) {
-        element.classList.add("correct")
-    } else {
+        correctAnswer ()
+        element.classList.add("correct");
+    } else { wrongAnswer ()
         element.classList.add("wrong")
     };
 };
@@ -134,21 +141,34 @@ function countDownTimer () {
     timerRule = setInterval(function () {
         timeRemaining.innerHTML = "Time Remaining: " + timer;
         timer--;
-        if(timer === 0) {
+        if(timer <= 0) {
             timer = 0;
-            finalScore();
+            finalQuizScore();
         };
     }, 1000);
 };
 
+function correctAnswer () {
+    rightAnswer.classList.remove("hide");
+}
+
 function wrongAnswer () {
-   console.log("Wrong Answer!!!");
-   timer = timer -= 5;
+    wrong.classList.remove("hide");
+    console.log("Wrong Answer!!!");
+//    timer = timer -= 2;
 };
 
-// function finalScore () {
-//     correctAnswers
-// }
+function finalQuizScore () {
+    questionCardEl.classList.add("hide");
+    nextButton.classList.add("hide");
+    timeRemaining.classList.add("hide")
+    rightAnswer.classList.add("hide");
+    wrong.classList.add("hide");
+    submissionFormEl.classList.remove("hide")
+    
+    //NEED TO END THE GAME WITH THIS FUNCTION
+    
+}
 
 
 
@@ -294,3 +314,57 @@ function wrongAnswer () {
 //       { text: '8', correct: true }
 //     ]
 //   }]
+
+
+// const question = [
+//         {
+//             question: "What is an array?",
+//             Choices: [
+//                 {text: "An ordered list of values"},
+//                 {text: "A field of solar panels"},
+//                 {text: "A sea creature"},
+//                 {text: "A machine that takes xray images"}
+//             ],
+//             correct: 0
+//         },
+//         {
+//             question: "What is a string in Javascript?",
+//             answers: [
+//                 {text: "A sequence of one or more characters"},
+//                 {text: "A piece of thread"},
+//                 {text: "A bond between two mortals"},
+//                 {text: "A line connecting two points together"}
+//             ],
+//             correct: 0
+//         },
+//         {
+//             question: "What is a useful way to debug code in Javascript?",
+//             answers: [
+//                 {text: "Screaming until your throat hurts"},
+//                 {text: "Asking your html page what went wrong"},
+//                 {text: "Using consol.log"},
+//                 {text: "Daydreaming about something else"}
+//             ],
+//             correct: 2
+//         },
+//         {
+//             question: "What is a Boolean in Java script?",
+//             answers: [
+//                 {text: "That thing you see in bays"},
+//                 {text: "Another sea creature"},
+//                 {text: "A data type for True or False"},
+//                 {text: "A tool used by mountain climbers"}
+//             ], 
+//             correct: 2
+//         },
+//         {
+//             question: "When was Java Script created?",
+//             answers: [
+//                 {text: "1997"},
+//                 {text: "2005"},
+//                 {text: "1800"},
+//                 {text: "1995"},
+//             ],
+//             correct: 3
+//         }
+//     ];
