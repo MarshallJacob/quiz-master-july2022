@@ -14,7 +14,7 @@ var answerButtonsEl = document.getElementById('answer-buttons');
 
 
 let shuffledQuestions, currentQuestionIndex;
-
+// setting event listeners for the different buttons presented. 
 startButton.addEventListener("click", startGame);
 nextButton.addEventListener("click", () => {
     currentQuestionIndex++;
