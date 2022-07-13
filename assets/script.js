@@ -1,3 +1,4 @@
+// Retreive elements from the html page
 const startButton = document.getElementById("start-btn");
 const nextButton = document.getElementById("next-btn");
 const questionCardEl = document.getElementById("question-card");
@@ -5,7 +6,8 @@ const timeRemaining = document.getElementById("timeRemaining");
 const rightAnswer = document.getElementById("correct")
 const wrong = document.getElementById("wrong")
 const submissionFormEl = document.getElementById("submissionForm")
-// var quizScore =  
+const finalScoreEl = document.getElementById("finalScore")
+var quizScore = 0 
 var timer = 60;
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById('answer-buttons');
@@ -102,7 +104,8 @@ question.answers.forEach(answers => {
     button.classList.add("btn");
     if (answers.correct) {
         button.dataset.correct = answers.correct;
-    }
+        quizScore++
+    };
     button.addEventListener("click", selectAnswer);
     answerButtonsEl.appendChild(button);
     });
@@ -127,7 +130,7 @@ function setStatusClass(element, correct) {
         correctAnswer ()
         element.classList.add("correct");
     } else { wrongAnswer ()
-        element.classList.add("wrong")
+        element.classList.add("wrong");
     };
 };
 
@@ -135,7 +138,7 @@ function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
 };
-
+// sets the countdown timer
 function countDownTimer () {
     timer = 60;
     timerRule = setInterval(function () {
@@ -155,30 +158,19 @@ function correctAnswer () {
 function wrongAnswer () {
     wrong.classList.remove("hide");
     console.log("Wrong Answer!!!");
-//    timer = timer -= 2;
 };
-
+// shows the final submission box
 function finalQuizScore () {
     questionCardEl.classList.add("hide");
     nextButton.classList.add("hide");
-    timeRemaining.classList.add("hide")
+    timeRemaining.classList.add("hide");
     rightAnswer.classList.add("hide");
     wrong.classList.add("hide");
-    submissionFormEl.classList.remove("hide")
-    
-    //NEED TO END THE GAME WITH THIS FUNCTION
-    
-}
+    submissionFormEl.classList.remove("hide");
+    finalScoreEl.innerHTML = "Your score is: " + quizScore;
+} ;
 
-
-
-
-
-
-
-
-
-
+//All code inspired by Web Dev Simplified youtube video "Build a quiz app" -dated Jun 15th 2019
 
 // Plan
 // 1. needs start button
@@ -196,124 +188,6 @@ function finalQuizScore () {
     // a. if time reaches zero before all questions are answered
     // b. if all questions are answered incorectly and/or A happens. 
 
-
-
-
-
-
-
-
-//         const startButton = document.getElementById('start-btn')
-// const nextButton = document.getElementById('next-btn')
-// const questionContainerElement = document.getElementById('question-container')
-// const questionElement = document.getElementById('question')
-// const answerButtonsElement = document.getElementById('answer-buttons')
-
-// let shuffledQuestions, currentQuestionIndex
-
-// startButton.addEventListener('click', startGame)
-// nextButton.addEventListener('click', () => {
-//   currentQuestionIndex++
-//   setNextQuestion()
-// })
-
-// function startGame() {
-//   startButton.classList.add('hide')
-//   shuffledQuestions = questions.sort(() => Math.random() - .5)
-//   currentQuestionIndex = 0
-//   questionContainerElement.classList.remove('hide')
-//   setNextQuestion()
-// }
-
-// function setNextQuestion() {
-//   resetState()
-//   showQuestion(shuffledQuestions[currentQuestionIndex])
-// }
-
-// function showQuestion(question) {
-//   questionElement.innerText = question.question
-//   question.answers.forEach(answer => {
-//     const button = document.createElement('button')
-//     button.innerText = answer.text
-//     button.classList.add('btn')
-//     if (answer.correct) {
-//       button.dataset.correct = answer.correct
-//     }
-//     button.addEventListener('click', selectAnswer)
-//     answerButtonsElement.appendChild(button)
-//   })
-// }
-
-// function resetState() {
-//   clearStatusClass(document.body)
-//   nextButton.classList.add('hide')
-//   while (answerButtonsElement.firstChild) {
-//     answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-//   }
-// }
-
-// function selectAnswer(e) {
-//   const selectedButton = e.target
-//   const correct = selectedButton.dataset.correct
-//   setStatusClass(document.body, correct)
-//   Array.from(answerButtonsElement.children).forEach(button => {
-//     setStatusClass(button, button.dataset.correct)
-//   })
-//   if (shuffledQuestions.length > currentQuestionIndex + 1) {
-//     nextButton.classList.remove('hide')
-//   } else {
-//     startButton.innerText = 'Restart'
-//     startButton.classList.remove('hide')
-//   }
-// }
-
-// function setStatusClass(element, correct) {
-//   clearStatusClass(element)
-//   if (correct) {
-//     element.classList.add('correct')
-//   } else {
-//     element.classList.add('wrong')
-//   }
-// }
-
-// function clearStatusClass(element) {
-//   element.classList.remove('correct')
-//   element.classList.remove('wrong')
-// }
-
-// const questions = [
-//   {
-//     question: 'What is 2 + 2?',
-//     answers: [
-//       { text: '4', correct: true },
-//       { text: '22', correct: false }
-//     ]
-//   },
-//   {
-//     question: 'Who is the best YouTuber?',
-//     answers: [
-//       { text: 'Web Dev Simplified', correct: true },
-//       { text: 'Traversy Media', correct: true },
-//       { text: 'Dev Ed', correct: true },
-//       { text: 'Fun Fun Function', correct: true }
-//     ]
-//   },
-//   {
-//     question: 'Is web development fun?',
-//     answers: [
-//       { text: 'Kinda', correct: false },
-//       { text: 'YES!!!', correct: true },
-//       { text: 'Um no', correct: false },
-//       { text: 'IDK', correct: false }
-//     ]
-//   },
-//   {
-//     question: 'What is 4 * 2?',
-//     answers: [
-//       { text: '6', correct: false },
-//       { text: '8', correct: true }
-//     ]
-//   }]
 
 
 // const question = [
