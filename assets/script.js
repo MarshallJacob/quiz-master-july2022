@@ -7,11 +7,13 @@ const rightAnswer = document.getElementById("correct")
 const wrong = document.getElementById("wrong")
 const submissionFormEl = document.getElementById("submissionForm")
 const finalScoreEl = document.getElementById("finalScore")
+const initialsEl = document.getElementById("initials")
+const subBtn = document.getElementById("sub-btn")
 var quizScore = 0 
 var timer = 60;
 var questionEl = document.getElementById("question");
 var answerButtonsEl = document.getElementById('answer-buttons');
-
+var timerRule
 
 let shuffledQuestions, currentQuestionIndex;
 // setting event listeners for the different buttons presented. 
@@ -116,9 +118,9 @@ function selectAnswer (e) {
     const selectButton = e.target;
     const correct = selectButton.dataset.correct;
     setStatusClass (document.body, correct);
-    Array.from(answerButtonsEl.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct);
-    });
+    // Array.from(answerButtonsEl.children).forEach(button => {
+    //     setStatusClass(button, button.dataset.correct);
+    // });
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove("hide")
     } else finalQuizScore ();
@@ -157,19 +159,35 @@ function correctAnswer () {
 
 function wrongAnswer () {
     wrong.classList.remove("hide");
+    timer -= 10
     console.log("Wrong Answer!!!");
 };
 // shows the final submission box
 function finalQuizScore () {
+    clearInterval(timerRule)
     questionCardEl.classList.add("hide");
     nextButton.classList.add("hide");
     timeRemaining.classList.add("hide");
     rightAnswer.classList.add("hide");
     wrong.classList.add("hide");
     submissionFormEl.classList.remove("hide");
-    finalScoreEl.innerHTML = "Your score is: " + quizScore;
+    finalScoreEl.innerHTML = "Your score is: " + timer;
 } ;
 
+function saveHighScore () {
+var initials = initialsEl.value
+if (initials !== ""){
+var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [] 
+var newScore = {
+    score: timer,
+    initials: initials
+}
+highScores.push(newScore)
+window.localStorage.setItem("highScores", JSON.stringify(highScores))
+} 
+
+}
+subBtn.addEventListener('click', saveHighScore)
 //All code inspired by Web Dev Simplified youtube video "Build a quiz app" -dated Jun 15th 2019
 
 // Plan
